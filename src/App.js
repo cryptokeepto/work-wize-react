@@ -29,13 +29,14 @@ class App extends Component {
 
   handleChangeToggle = (event) => {
     const { checked, id } = event.target
-
-    this.state.list[id].isCompleted = checked
-    this.setState({
+    // this.state.list[id].isCompleted = checked
+    this.setState(({ list }) => ({
       list: [
-        ...this.state.list
+        ...list.slice(0, id),
+        { ...list[id], isCompleted: checked },
+        ...list.slice(id + 1)
       ]
-    })
+    }))
   }
 
   handleChangeTitle = (event) => {
@@ -89,8 +90,8 @@ class App extends Component {
         <h6>
           {
             isUncompleted.length === 0 ?
-            <div>Go to sleep <i style={{ color: "green" }} className="fas fa-bed"></i></div> :
-            <div>Just do it <i style={{ color: "red" }} className="fas fa-fire-alt"></i></div>
+              <div>Go to sleep <i style={{ color: "green" }} className="fas fa-bed"></i></div> :
+              <div>Just do it <i style={{ color: "red" }} className="fas fa-fire-alt"></i></div>
           }
         </h6>
         <List
