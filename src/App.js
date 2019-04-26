@@ -29,7 +29,7 @@ class App extends Component {
 
   handleChangeToggle = (event) => {
     const { checked, id } = event.target
-    // this.state.list[id].isCompleted = checked
+
     this.setState(({ list }) => ({
       list: [
         ...list.slice(0, id),
@@ -41,6 +41,7 @@ class App extends Component {
 
   handleChangeTitle = (event) => {
     const { value, id } = event.target
+
     this.state.list[id].title = value
     this.setState({
       list: [
